@@ -1,27 +1,31 @@
 [
-  {
-    "key": "cmd+e",
-    "command": "editor.action.showHover",
-    "when": "editorTextFocus"
-  },
-  {
-    "key": "cmd+h",
-    "command": "workbench.view.explorer"
-  },
-  {
-    "key": "cmd+l",
-    "command": "workbench.action.focusActiveEditorGroup"
-  },
-  {
-    "key": "cmd+j",
-    "command": "workbench.action.terminal.focus"
-  },
-  {
-    "key": "cmd+k",
-    "command": "workbench.action.focusActiveEditorGroup"
-  },
-  {
-    "key": "cmd+c",
-    "command": "editor.action.clipboardCopyWithSyntaxHighlightingAction"
-  }
+	{
+		"key": "cmd+e",
+		"command": "editor.action.showHover",
+		"when": "editorTextFocus"
+	},
+	{
+		"key": "cmd+h",
+		"command": "workbench.view.explorer"
+	},
+	{
+		"key": "cmd+l",
+		"command": "workbench.action.focusActiveEditorGroup"
+	},
+	{
+		"key": "cmd+j",
+		"command": "workbench.action.terminal.focus"
+	},
+	{
+		"key": "cmd+k",
+		"command": "workbench.action.focusActiveEditorGroup"
+	},
+	{
+		"key": "cmd+n",
+		"command": "explorer.newFile"
+	},
+	{
+		"key": "cmd+shift+n",
+		"command": "explorer.newFolder"
+	}
 ]

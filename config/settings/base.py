@@ -5,6 +5,7 @@ from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR_STATIC = Path(__file__).resolve().parent.parent.parent
 
 env = environ.Env()
 
@@ -29,26 +30,31 @@ THIRD_PARTY_APPS = [
     "rest_framework.authtoken",
     "django_filters",
     "corsheaders",
+    "phonenumber_field",
     # redis
     "django_celery_beat",
+    # admin
+    "django_extensions",
 ]
 
 OWN_APPS = [
     # my installed apps
     "users",
+    "users.secretaries",
+    "users.teachers",
+    "companies",
     "webhooks",
     "api",
     "api.v1",
+    "utils",
+    "company_assets",
+    "company_assets.offices",
+    "company_assets.vehicles",
+    "licences",
+    "permissions",
 ]
 
-CORS_ALLOWED_ORIGINS = [
-    "https://example.com",
-    "https://sub.example.com",
-    "http://localhost:8080",
-    "http://127.0.0.1:9000",
-    "http://0.0.0.0:3000",
-]
-
+CORS_ORIGIN_ALLOW_ALL = True
 
 INSTALLED_APPS = BASE_APPS + OWN_APPS + THIRD_PARTY_APPS
 
@@ -109,6 +115,19 @@ USE_TZ = True
 
 STATIC_URL = "static/"
 
+
+STATICFILES_DIRS = [
+    BASE_DIR_STATIC / "static",
+]
+
+# media
+
+MEDIA_URL = "/media/"
+
+# Path where media is stored
+MEDIA_ROOT = os.path.join(BASE_DIR, "media/")
+
+
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # Security
@@ -128,6 +147,7 @@ MANAGERS = ADMINS
 if USE_TZ:
     CELERY_TIMEZONE = TIME_ZONE
 
+HOLDED_API_KEY = env("HOLDED_API_KEY")
 
 CELERY_BROKER_URL = env("REDIS_HOST_CELERY")
 CELERY_RESULT_BACKEND = CELERY_BROKER_URL
@@ -145,8 +165,10 @@ REST_FRAMEWORK = {
     ),
     "DEFAULT_AUTHENTICATION_CLASSES": (
         "rest_framework.authentication.TokenAuthentication",
+        "rest_framework.authentication.SessionAuthentication",
     ),
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.LimitOffsetPagination",
+    "DEFAULT_FILTER_BACKENDS": ["django_filters.rest_framework.DjangoFilterBackend"],
     "PAGE_SIZE": 10,
 }
 

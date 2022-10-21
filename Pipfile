@@ -29,6 +29,11 @@ flower = "*"
 pika = "*"
 numpy = "*"
 pandas = "*"
+pillow = "*"
+pip = "*"
+install = "*"
+django-phonenumber-field = {extras = ["phonenumbers"], version = "*"}
+django-extensions = "*"
 
 [dev-packages]
 
